@@ -11,7 +11,7 @@ namespace ASP.Server.Model
 
         [Key]
         public int Id { get; set; }
-        public string Genres { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
 
         // Mettez ici les propriété de votre livre: Nom et Livres associés
