@@ -58,25 +58,70 @@ namespace ASP.Server.Api
         // Vous vous montre comment faire la 1er, a vous de la compléter et de faire les autres !
         public ActionResult<List<Book>> GetBooks(int? id, int? limit, int? offset)
         {
-            // id -> id de genre
-            // limit -> qte
-            // offset -> skip
-            var req = libraryDbContext.Books;
+            var req = libraryDbContext.Books.ToList();
+            var count = req.Count;
             if (id.HasValue)
             {
-               // req.Where(book => book.);
+                var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(id));
+                try
+                {
+                    req = req.Where(book => {
+                        if (book.Kinds != null) { return book.Kinds.Contains(genre); }
+                        return false;
+                    }).ToList();
+                } catch (NullReferenceException ex)
+                {
+                    
+                }
+            }
+            if (offset.HasValue)
+            {
+                if (offset < 0)
+                {
+                    return NotFound("offset ne peut pas être négatif");
+                }
+                if (offset > count)
+                {
+                    offset = count;
+                }
+                req = req.Skip((int) offset).ToList();
+            }
+            if (limit.HasValue)
+            {
+                if (limit < 0)
+                {
+                    return NotFound("limit ne peut pas être négatif");
+                }
+                if (limit + offset > count)
+                {
+                    limit = count - offset;
+                }
+                req = req.Take((int) limit).ToList();
             }
             return req.ToList();
         }
 
         public ActionResult<Book> GetBook (int? id)
         {
-            throw new NotImplementedException("You have to do it youtself");
+            try
+            {
+                return libraryDbContext.Books.Single(book => book.Id == id);
+            }catch (Exception e)
+            {
+                return NotFound("Id book not found");
+            }
         }
 
         public ActionResult<List<Genre>> GetGenres()
         {
-            throw new NotImplementedException("You have to do it youtself");
+            try
+            {
+                return libraryDbContext.Genre.ToList();
+            }
+            catch (Exception e)
+            {
+                return NotFound("Aucun genre trouvé...");
+            }
         }
     }
 }
