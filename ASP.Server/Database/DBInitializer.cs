@@ -28,26 +28,15 @@ Quisque lacinia, elit in consequat commodo, dolor lacus bibendum mi, sit amet ve
 Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec volutpat tempus diam, vel mattis ex pharetra at. Vestibulum interdum bibendum risus. Mauris sollicitudin iaculis quam nec dictum. Phasellus in pharetra nulla, in venenatis ipsum. Suspendisse ligula nisi, venenatis id lacinia et, iaculis id augue. Phasellus a odio ut turpis lacinia molestie.Nulla scelerisque elit metus, eget gravida ex porta eget. Donec euismod, ipsum id hendrerit efficitur, quam metus volutpat nisl, ac efficitur est odio sed mauris.";
 
           bookDbContext.Genre.AddRange(
-                new Genre()
-                {
-                    Genres = "SF",
-                    Description = "SF bla bla bla"
-                },
-                new Genre()
-                {
-                    Genres = "Classique",
-                    Description = "Classique bla bla bla"
-                },
-                new Genre()
-                {
-                    Genres = "Romance",
-                    Description = "Romance bla bla bla"
-                },
-                new Genre()
-                {
-                    Genres = "Thriller",
-                    Description = " Thriller bla bla bla"
-                }
+                new Genre() { Name = "Comedie", Description = "Oeuvre comique ou proposant des procédés comiques." },
+                new Genre() { Name ="Documentaire", Description = "Oeuvre documentaire." }, 
+                new Genre() { Name = "Action", Description = "Oeuvre d'action." },
+                new Genre() { Name = "Drama", Description = "Oeuvre Dramatique." },
+                new Genre() { Name ="Thriller", Description="Oeuvre Policière." },
+                new Genre() { Name = "Adventure", Description = "Oeuvre d'aventure." },
+                new Genre() { Name = "Crime", Description = "Oeuvre Criminelle." },
+                new Genre() { Name = "Romance", Description = "Oeuvre Romantique." },
+                new Genre() { Name = "SF", Description = "Oeuvre de Science Fiction." }
             );
             bookDbContext.SaveChanges();
 
@@ -60,7 +49,8 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                     Author = "Antonin",
                     Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "SF") }
+                    //Kinds = bookDbContext.Genre.Where(x => { return (x.Name == "SF" | x.Name == "Romance") }).ToList()
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "SF") }
                 },
                 new Book()
                 {
@@ -68,7 +58,7 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                     Author = "Khadijat",
                     Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "Classique") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Comedie") }
                 },
                 new Book()
                 {
