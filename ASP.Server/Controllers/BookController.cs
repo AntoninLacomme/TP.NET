@@ -29,7 +29,7 @@ namespace ASP.Server.Controllers
         // Ajouter ici tous les champ que l'utilisateur devra remplir pour ajouter un livre
 
         // Liste des genres séléctionné par l'utilisateur
-        public List<Genre> Genres { get; set; }
+        public List<int> Genres { get; set; }
 
         // Liste des genres a afficher à l'utilisateur
         public IEnumerable<Genre> AllGenres { get; init;  }
@@ -62,7 +62,13 @@ namespace ASP.Server.Controllers
             {
                 
                 // Il faut intéroger la base pour récupérer l'ensemble des objets genre qui correspond aux id dans CreateBookModel.Genres
-                //List<Genre> genres = book.Genres.ToList();
+                List<Genre> genres = new List<Genre>();
+                foreach (var item in book.Genres)
+                {
+                    var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
+                    genres.Add(genre);
+
+                }
                 Console.WriteLine("test Genres");
                 //Console.WriteLine(book.Genres.ToList());
 
@@ -73,6 +79,7 @@ namespace ASP.Server.Controllers
                     Author = book.Author,
                     Price = book.Price,
                     Content = book.Content,
+                    Kinds = genres
                 };
 
                 try
