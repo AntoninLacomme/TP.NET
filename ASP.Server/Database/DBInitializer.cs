@@ -30,22 +30,22 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
           bookDbContext.Genre.AddRange(
                 new Genre()
                 {
-                    Name = "SF",
+                    Genres = "SF",
                     Description = "SF bla bla bla"
                 },
                 new Genre()
                 {
-                    Name="Classique",
+                    Genres = "Classique",
                     Description = "Classique bla bla bla"
                 },
                 new Genre()
                 {
-                    Name = "Romance",
+                    Genres = "Romance",
                     Description = "Romance bla bla bla"
                 },
                 new Genre()
                 {
-                    Name = "Thriller",
+                    Genres = "Thriller",
                     Description = " Thriller bla bla bla"
                 }
             );
@@ -58,33 +58,33 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                 {
                     Name = "kalila wa demna",
                     Author = "Antonin",
-                    Price = 49,
+                    Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "SF") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "SF") }
                 },
                 new Book()
                 {
                     Name = "Harry Potter",
                     Author = "Khadijat",
-                    Price = 49,
+                    Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Classique") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "Classique") }
                 },
                 new Book()
                 {
                     Name = "Voyage au bout de la nuit",
                     Author = "Lotfi",
-                    Price = 49,
+                    Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Romance") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "Romance") }
                 },
                 new Book()
                 {
                     Name = "Le seigneur des anneaux",
                     Author = "Rachid",
-                    Price = 49,
+                    Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Thriller") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "Thriller") }
                 }
             );
             // Vous pouvez initialiser la BDD ici
