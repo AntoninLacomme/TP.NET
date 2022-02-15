@@ -66,7 +66,7 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                     Author = "Lotfi",
                     Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "Romance") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Romance") }
                 },
                 new Book()
                 {
@@ -74,7 +74,7 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                     Author = "Rachid",
                     Price = "49",
                     Content = loremIpsum,
-                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Genres == "Thriller") }
+                    Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Thriller") }
                 }
             );
             // Vous pouvez initialiser la BDD ici
