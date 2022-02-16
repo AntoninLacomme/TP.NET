@@ -11,6 +11,9 @@ namespace ASP.Server.Controllers
 {
     public class CreateBookModel
     {
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
         [Required]
         [Display(Name = "Nom")]
         public String Name { get; set; }
@@ -52,7 +55,7 @@ namespace ASP.Server.Controllers
 
             List<Book> ListBooks = libraryDbContext.Books.Include(g=>g.Kinds).ToList();
           
-            return ListBooks;
+            return View(ListBooks);
         }
 
         public ActionResult<CreateBookModel> Create(CreateBookModel book)
@@ -99,5 +102,77 @@ namespace ASP.Server.Controllers
             // Il faut interoger la base pour récupérer tous les genres, pour que l'utilisateur puisse les slécétionné
             return View(new CreateBookModel() { AllGenres = libraryDbContext.Genre.ToList() } );
         }
+        //  deletebook page
+        public ActionResult<IEnumerable<Book>> Action()
+        {
+            List<Book> ListBooks = libraryDbContext.Books.Include(g => g.Kinds).ToList();
+            Console.WriteLine("ok Delete page !");
+
+
+            return View(ListBooks);
+        }
+
+
+        //remove book
+
+        public ActionResult<Boolean> RemoveBook(int bookId)
+        {
+
+            var book = libraryDbContext.Books.Single(book => book.Id == bookId);
+            Console.WriteLine("book name " + book.Name);
+            libraryDbContext.Books.Remove(book);
+            libraryDbContext.SaveChanges();
+
+            return RedirectToAction("Action");
+        }
+
+       
+        // simple redirect to methode update book
+
+        public ActionResult<Boolean> RedirectUpdateBook(int bookId)
+        {
+            return RedirectToAction("Update", new { bookId = bookId });
+        }
+
+
+        // methode permet de mettre a jour un book
+        public ActionResult<Boolean> Update(int bookId, CreateBookModel book)
+        {
+
+
+            // fetch book with id
+            var b = libraryDbContext.Books.Single(book => book.Id == bookId);
+            // get new data
+            if (ModelState.IsValid)
+            {
+                List<Genre> genres = new List<Genre>();
+                foreach (var item in book.Genres)
+                {
+                    var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
+                    genres.Add(genre);
+
+                }
+                b.Name = book.Name;
+                b.Author = book.Author;
+                b.Price = book.Price;
+                b.Content = book.Content;
+                b.Kinds = genres;
+
+                libraryDbContext.Books.Update(b);
+                libraryDbContext.SaveChanges();
+
+                return RedirectToAction("Delete");
+
+
+            }
+            return View(new CreateBookModel() {Id= bookId, AllGenres = libraryDbContext.Genre.ToList() });
+
+        }
+
+
+
+
+
+
     }
 }

@@ -6,14 +6,11 @@
 }
 
 <head>
-
-        <link rel="stylesheet" href="~/css/list.css" />
-
+    <link href="/css/list.css" rel="stylesheet" type="text/css" />
 
 </head>
-
 <div class="listeBooks">
-    <h1>Liste des livres:</h1>
+    <h1 class="title">Book Pannel</h1>
     <!-- la liste des genres est dans la variable Model qui est typé en ligne 3, elle correspond à la variable xxx dans View(xxx) du controller -->
 
 
@@ -26,12 +23,8 @@
                     <tr class="custom-th">
                         <th class="th-code">Name</th>
                         <th class="th-produit">Author</th>
-                        <th class="th-name">Price</th>
-                        <th class="th-name">Content</th>
-                        <th class="th-name">Kinds</th>
+                        <th class="th-name">Action</th>
 
-
-           
                     </tr>
                     </thead>
                     <tbody>
@@ -41,15 +34,18 @@
                 {      <tr class="td-custom" tabindex="0">
                             <td>@book.Name</td>
                             <td>@book.Author</td>
-                            <td>@book.Price</td>
-                            <td>@book.Content</td>
-                            <td>
-                                @foreach (var kinds in book.Kinds)
-                                {
-                                    <p>@kinds.Name</p>
-                                }
 
-                
+                            <td>
+                                <form asp-controller="Book" asp-action="RemoveBook">
+                                    <input type="hidden" value="@book.Id" name="bookId">
+                                    <input class="btn btn-warning" type="submit"  value="Delete" style="width: 20%;" />
+                                 </form>
+
+                                 <form asp-controller="Book" asp-action="RedirectUpdateBook">
+                                    <input type="hidden" value="@book.Id" name="bookId">
+                                    <input class="btn btn-success" type="submit"  value="Update" style="width: 20%;" />
+                                 </form>
+
                             </td>
 
                         </tr>
