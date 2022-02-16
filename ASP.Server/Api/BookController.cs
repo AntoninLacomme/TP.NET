@@ -56,22 +56,26 @@ namespace ASP.Server.Api
 
 
         // Vous vous montre comment faire la 1er, a vous de la compléter et de faire les autres !
-        public ActionResult<List<Book>> GetBooks(int? id, int? limit, int? offset)
+        public ActionResult<List<BookPublic>> GetBooks(int? genre, int? limit, int? offset)
         {
-            var req = libraryDbContext.Books.ToList();
-            var count = req.Count;
-            if (id.HasValue)
+            IEnumerable<BookPublic> req = libraryDbContext.Books.Include(x => x.Kinds).Select(book => new BookPublic() { Book = book });
+            var count = req.Count();
+            if (genre.HasValue)
             {
-                var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(id));
                 try
                 {
+                    var _genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(genre));
                     req = req.Where(book => {
-                        if (book.Kinds != null) { return book.Kinds.Contains(genre); }
+                        if (book.Kinds != null) { return book.Kinds.Contains(_genre); }
                         return false;
-                    }).ToList();
-                } catch (NullReferenceException ex)
+                    });
+
+                } catch (InvalidOperationException ex)
                 {
-                    
+                    return NotFound("Genre inexistant");
+                } catch (Exception ex)
+                {
+                    return NotFound("Erreur lors de la recherche du genre.");
                 }
             }
             if (offset.HasValue)
@@ -84,7 +88,7 @@ namespace ASP.Server.Api
                 {
                     offset = count;
                 }
-                req = req.Skip((int) offset).ToList();
+                req = req.Skip((int) offset);
             }
             if (limit.HasValue)
             {
@@ -96,20 +100,33 @@ namespace ASP.Server.Api
                 {
                     limit = count - offset;
                 }
-                req = req.Take((int) limit).ToList();
+                req = req.Take((int)limit);
             }
             return req.ToList();
         }
 
-        public ActionResult<Book> GetBook (int? id)
+        public ActionResult<Book> GetBook(int? id)
         {
             try
             {
-                return libraryDbContext.Books.Single(book => book.Id == id);
-            }catch (Exception e)
+                return libraryDbContext.Books.Include(x => x.Kinds).Single(book => book.Id == id);
+            }
+            catch (Exception e)
             {
                 return NotFound("Id book not found");
             }
+        }        
+    }
+
+    [Route("/api/[controller]/[action]")]
+    [ApiController]
+    public class GenreController : ControllerBase
+    {
+        private readonly LibraryDbContext libraryDbContext;
+
+        public GenreController(LibraryDbContext libraryDbContext)
+        {
+            this.libraryDbContext = libraryDbContext;
         }
 
         public ActionResult<List<Genre>> GetGenres()
