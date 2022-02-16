@@ -69,6 +69,7 @@ namespace ASP.Server.Api
                         if (book.Kinds != null) { return book.Kinds.Contains(_genre); }
                         return false;
                     }).ToList();
+
                 } catch (InvalidOperationException ex)
                 {
                     return NotFound("Genre inexistant");

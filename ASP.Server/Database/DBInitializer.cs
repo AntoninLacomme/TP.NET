@@ -77,8 +77,39 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                     Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Thriller") }
                 }
             );
+
+            var authors = new List<String>()
+            {
+                "Antonin", "Khadijat", "Lotfi", "Rachid"
+            };
+
+            var length = bookDbContext.Genre.Count()-1;
+
+            for (var i = 0; i < 1000; i++) {
+                var genres = new List<Genre>();
+                for (var j=0; j<new Random().Next(3)+1; j++)
+                {
+                    var myid = new Random().Next(length) + 1;
+                    genres.Add(bookDbContext.Genre.Single(x => x.Id == myid));
+                }
+
+                bookDbContext.Books.Add(new Book()
+                {
+                    Name = RandomString (10, 20),
+                    Author = authors[new Random().Next(authors.Count)],
+                    Price = ((Double)(new Random().Next(10000)) / 100).ToString(),
+                    Content = loremIpsum,
+                    Kinds = genres
+                });
+            }
             
             bookDbContext.SaveChanges();
+        }
+        public static string RandomString(int min, int max)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, new Random().Next(max-min)+min)
+                .Select(s => s[new Random().Next(s.Length)]).ToArray());
         }
     }
 }
