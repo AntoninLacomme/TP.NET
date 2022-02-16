@@ -77,8 +77,7 @@ Donec turpis metus, aliquam sit amet dictum condimentum, feugiat vel orci.Donec 
                     Kinds = new List<Genre> { bookDbContext.Genre.Single(genre => genre.Name == "Thriller") }
                 }
             );
-            // Vous pouvez initialiser la BDD ici
-
+            
             bookDbContext.SaveChanges();
         }
     }
