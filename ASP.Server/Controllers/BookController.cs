@@ -89,8 +89,7 @@ namespace ASP.Server.Controllers
                 {
                    libraryDbContext.Add(b);
                    libraryDbContext.SaveChanges();
-                   Console.WriteLine("ok man !");
-                    Redirect("/");
+                    return RedirectToAction("List");
                 }
                 catch (Exception e)
                 {
@@ -123,7 +122,7 @@ namespace ASP.Server.Controllers
             libraryDbContext.Books.Remove(book);
             libraryDbContext.SaveChanges();
 
-            return RedirectToAction("Action");
+            return RedirectToAction("List");
         }
 
        
@@ -158,10 +157,10 @@ namespace ASP.Server.Controllers
                 b.Content = book.Content;
                 b.Kinds = genres;
 
-                libraryDbContext.Books.Update(b);
+                libraryDbContext.Update(b);
                 libraryDbContext.SaveChanges();
 
-                return RedirectToAction("Delete");
+                return RedirectToAction("List");
 
 
             }
