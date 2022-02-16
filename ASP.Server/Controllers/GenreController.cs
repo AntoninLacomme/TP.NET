@@ -6,9 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ASP.Server.Controllers
-{
+{ 
+    
+
+
     public class GenreController : Controller
     {
         private readonly LibraryDbContext libraryDbContext;
@@ -19,5 +23,10 @@ namespace ASP.Server.Controllers
         }
 
         // A vous de faire comme BookController.List mais pour les genres !
+
+        public IActionResult Index()
+        {
+            return View(new Genre {  });
+        }
     }
 }

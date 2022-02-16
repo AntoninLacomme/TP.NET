@@ -16,6 +16,18 @@
             <Button Command="{Binding Path=GoToHome}" Width="50" Content="Accueil"/>
         </StackPanel>
         <Label DockPanel.Dock="Top" Content="Library system" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30px"/>
-        <ContentPresenter  Content="{Binding Path=Frame}" x:Name="Navigation"/>
+
+        <Grid DockPanel.Dock="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+            <Button Command="{Binding Path=(model:DetailsBook).GoTo}" Grid.Column="0" Width="100" Content="Detail livre" Height="40"/>
+            <Button Command="{Binding }" Grid.Column="1" Width="100" Content="Genre" Height="40"/>
+      
+        </Grid>
+        <ContentPresenter x:Name="Navigation" Height="381" Width="803">
+            
+        </ContentPresenter>
     </DockPanel>
 </Window>

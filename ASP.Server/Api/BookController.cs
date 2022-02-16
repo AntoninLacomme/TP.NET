@@ -71,6 +71,7 @@ namespace ASP.Server.Api
 
         public ActionResult<Book> GetBook (int? id)
         {
+           
             throw new NotImplementedException("You have to do it youtself");
         }
 
