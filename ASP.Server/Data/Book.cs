@@ -26,6 +26,7 @@ namespace ASP.Server.Model
     {
         [JsonIgnore]
         public Book Book { init; private get; }
+        public int Id { get { return Book.Id; } }
         public string Name { get { return Book.Name; } }
         public string Author { get { return Book.Author; } }
         public string Price { get { return Book.Price; } }

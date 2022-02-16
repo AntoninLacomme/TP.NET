@@ -109,7 +109,7 @@ namespace ASP.Server.Api
         {
             try
             {
-                return libraryDbContext.Books.Single(book => book.Id == id);
+                return libraryDbContext.Books.Include(x => x.Kinds).Single(book => book.Id == id);
             }
             catch (Exception e)
             {
