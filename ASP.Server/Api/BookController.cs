@@ -58,8 +58,8 @@ namespace ASP.Server.Api
         // Vous vous montre comment faire la 1er, a vous de la compléter et de faire les autres !
         public ActionResult<List<BookPublic>> GetBooks(int? genre, int? limit, int? offset)
         {
-            var req = libraryDbContext.Books.Select(book => new BookPublic() { Book = book }). ToList();
-            var count = req.Count;
+            IEnumerable<BookPublic> req = libraryDbContext.Books.Include(x => x.Kinds).Select(book => new BookPublic() { Book = book });
+            var count = req.Count();
             if (genre.HasValue)
             {
                 try
@@ -68,7 +68,7 @@ namespace ASP.Server.Api
                     req = req.Where(book => {
                         if (book.Kinds != null) { return book.Kinds.Contains(_genre); }
                         return false;
-                    }).ToList();
+                    });
 
                 } catch (InvalidOperationException ex)
                 {
@@ -88,7 +88,7 @@ namespace ASP.Server.Api
                 {
                     offset = count;
                 }
-                req = req.Skip((int) offset).ToList();
+                req = req.Skip((int) offset);
             }
             if (limit.HasValue)
             {
@@ -100,7 +100,7 @@ namespace ASP.Server.Api
                 {
                     limit = count - offset;
                 }
-                req = req.Take((int) limit).ToList();
+                req = req.Take((int)limit);
             }
             return req.ToList();
         }

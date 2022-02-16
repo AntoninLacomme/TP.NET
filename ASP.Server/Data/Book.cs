@@ -31,4 +31,12 @@ namespace ASP.Server.Model
         public string Price { get { return Book.Price; } }
         public List<Genre> Kinds { get { return Book.Kinds; } }
     }
+
+    public class BookGenre
+    {
+        [JsonIgnore]
+        public Book Book { init; private get; }
+        public string Name { get { return Book.Name; } }
+        public string Author {  get { return Book.Author; } }
+    }
 }
