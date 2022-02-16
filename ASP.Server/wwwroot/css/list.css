@@ -103,6 +103,13 @@
     text-align: center;
 
 }
+.label {
+    color: #500472;
+    text-align: center;
+    font-family: "Century Schoolbook";
+    margin-left: auto;
+    margin-right: auto;
+}
 .th-name{
     width: 7%;
     text-align: center;
