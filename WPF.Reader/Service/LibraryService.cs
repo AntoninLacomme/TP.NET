@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
+using WPF.Reader.ApiBook;
 using WPF.Reader.Model;
 
 namespace WPF.Reader.Service
@@ -10,10 +14,26 @@ namespace WPF.Reader.Service
         // Donc pas de LibraryService.Instance.Books = ...
         // mais plutot LibraryService.Instance.Books.Add(...)
         // ou LibraryService.Instance.Books.Clear()
-        public ObservableCollection<Book> Books { get; set; } = new ObservableCollection<Book>() {
-            new Book(),
-            new Book(),
-            new Book()
+
+
+        async public void getBooks()
+        {
+            var client = new ApiBook.Client(new System.Net.Http.HttpClient() { BaseAddress = new System.Uri("https://localhost:5001") });
+            var result = await client.ApiBookGetBooksAsync(null, 10, null);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Books.Clear();
+                foreach (BookPublic book in result)
+                {
+                    Books.Add(book);
+                }
+            });
+        }
+        public ObservableCollection<BookPublic> Books { get; set; } = new ObservableCollection<BookPublic>() {
+            new BookPublic(),
+            new BookPublic(),
+            new BookPublic()
         };
 
         // C'est aussi ici que vous ajouterez les requète réseau pour récupérer les livres depuis le web service que vous avez fait

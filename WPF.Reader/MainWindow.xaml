@@ -18,16 +18,19 @@
         <Label DockPanel.Dock="Top" Content="Library system" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30px"/>
 
         <Grid DockPanel.Dock="Top">
-        <Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+      
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-            <Button Command="{Binding Path=(model:DetailsBook).GoTo}" Grid.Column="0" Width="100" Content="Detail livre" Height="40"/>
+            <Button Command="{Binding ViewBooks}" Grid.Column="0" Width="100" Content="List livre" Height="40"/>
             <Button Command="{Binding }" Grid.Column="1" Width="100" Content="Genre" Height="40"/>
-      
+           
         </Grid>
-        <ContentPresenter x:Name="Navigation" Height="381" Width="803">
-            
-        </ContentPresenter>
+        <ContentPresenter  Content="{Binding Path=Frame}" x:Name="Navigation" Height="381" Width="803" />
     </DockPanel>
 </Window>

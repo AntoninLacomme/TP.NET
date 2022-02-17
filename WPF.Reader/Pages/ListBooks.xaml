@@ -11,6 +11,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListBooks">
     <StackPanel>
+        <Label Content="test" />
         <!-- 
             A vous de créer la liste avec le bon binding. Une <ListBox> fera l'affaire 
             La propriété ItemsSource doit pointé vers la propiété Books de votre dataContext actuelle 
@@ -24,6 +25,27 @@
             Command="{Binding DataContext.ItemSelectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
             CommandParameter="{Binding .}"
         -->
+
+        <ListView ItemsSource="{Binding ListBook}" Grid.Row="1"  Grid.Column="0" SelectionChanged="ListView_SelectionChanged">
+
+            <ListView.View >
+
+                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="genre"  >
+
+                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Titre" Width="200"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Auteur" Width="200"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Genre" Width="200"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Prix" Width="200"/>
+                </GridView>
+
+
+
+            </ListView.View>
+        </ListView>
+ 
     </StackPanel>
 </Page>
 

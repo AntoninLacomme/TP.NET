@@ -1,0 +1,185 @@
+﻿{
+  "x-generator": "NSwag v13.15.9.0 (NJsonSchema v10.6.8.0 (Newtonsoft.Json v13.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "text/plain",
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/api/Book/GetBooks": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "operationId": "Book_GetBooks",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "genre",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BookPublic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Book/GetBook": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "operationId": "Book_GetBook",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        }
+      }
+    },
+    "/api/Genre/GetGenres": {
+      "get": {
+        "tags": [
+          "Genre"
+        ],
+        "operationId": "Genre_GetGenres",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Genre"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BookPublic": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Genre"
+          }
+        }
+      }
+    },
+    "Genre": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Book": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Genre"
+          }
+        }
+      }
+    }
+  }
+}

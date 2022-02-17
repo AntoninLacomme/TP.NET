@@ -15,7 +15,31 @@ using System.Windows.Input;
 namespace WPF.Reader.Model
 {
     // A vous de completer ce qu'est un Livre !!
-    public class Book
+    /*public class Book
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Author { get; set; }
+        public string Price { get; set; }
+        public string Content { get; set; }
+        public List<Genre> Kinds { get; set; }
+
+    }*/
+/*
+    public class BookPublic
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Author { get; set; }
+        public string Price { get; set; }
+        public List<Genre> Kinds { get; set; }
     }
+    public class Genre
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<Book> Books { get; set; }
+
+    }*/
 }
