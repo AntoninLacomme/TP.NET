@@ -1,14 +1,69 @@
 ﻿@using ASP.Server.Model
 @model IEnumerable<Book>
 @{
+
     ViewData["Title"] = "Home Page";
 }
 
+<head>
+    <link href="/css/list.css" rel="stylesheet" type="text/css" />
+
+</head>
 <div class="listeBooks">
-    <h1>Liste des livres:</h1>
+    <h1 class="title">Book Pannel</h1>
     <!-- la liste des genres est dans la variable Model qui est typé en ligne 3, elle correspond à la variable xxx dans View(xxx) du controller -->
-    @foreach (var book in Model)
-    {
-    }
+
+
+
+
+            <div class="row">
+            <div class="col-12">
+                <table class="tableau table  table-striped table-bordered">
+                    <thead class="tr-custom">
+                    <tr class="custom-th">
+                        <th class="th-code">Name</th>
+                        <th class="th-produit">Author</th>
+                        <th class="th-name">Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                @foreach (var book in Model)
+
+                {      <tr class="td-custom" tabindex="0">
+                            <td>@book.Name</td>
+                            <td>@book.Author</td>
+
+                            <td>
+                                <form asp-controller="Book" asp-action="RemoveBook">
+                                    <input type="hidden" value="@book.Id" name="bookId">
+                                    <input class="btn btn-warning" type="submit"  value="Delete" style="width: 20%;" />
+                                 </form>
+
+                                 <form asp-controller="Book" asp-action="RedirectUpdateBook">
+                                    <input type="hidden" value="@book.Id" name="bookId">
+                                    <input class="btn btn-success" type="submit"  value="Update" style="width: 20%;" />
+                                 </form>
+
+                            </td>
+
+                        </tr>
+                   }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    
 </div>
 

@@ -1,0 +1,208 @@
+﻿.title{
+    color: #500472;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 50px;
+    font-family: "Century Schoolbook";
+    margin-left: auto;
+    margin-right: auto;
+}
+.input{
+    width: 15%;
+    padding: 3px 3px;
+    box-sizing: border-box;
+    border-color: #500472 ;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.input-search{
+    margin-top: 50px;
+    text-align: center;
+    font-style: italic;
+    margin-left: auto;
+    margin-right: auto;
+}
+.search-date{
+    margin-top: 25px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+.custom-th th:hover {
+    background-color: lightskyblue;
+}
+.tableau tbody tr:hover {
+    background-color: lightskyblue;
+}
+.tr-custom tr  {
+    background-color: #500472;
+    color: white;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.td-custom td  {
+    font-size: 13px;
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 110%;
+    font-weight: bold;
+    font-family: "Times New Roman";
+}
+.td-custom td:hover{
+    color: white;
+
+}
+.button-date{
+    background-color: #500472 ;
+    color: white;
+    margin-top: 15px;
+    border-radius: 25px;
+    padding: 3px 15px;
+    margin-left: 48%;
+}
+.select{
+    margin-bottom: 1%;
+}
+.custom-p2:hover{
+    background-color: lightskyblue;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none; -select: none;
+}
+.button-date:hover {
+    background-color: lightskyblue;
+}
+.custom-p{
+    color: #500472;
+    font-size: 100%;
+    font-family: "Century Schoolbook";
+    font-weight: bold;
+    font-style: inherit;
+    text-transform: uppercase;
+
+}
+.custom-p2{
+    margin-top: 10%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    font-family: "Century Schoolbook";
+    font-size: 220%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25em;
+    background-color:#500472 ;
+    padding: 20px 20px;
+    border-radius: 10px 140px 30px 140px;
+}
+.custom-th .th-action{
+    width: 5%;
+    text-align: center;
+
+}
+.label {
+    color: #500472;
+    text-align: center;
+    font-family: "Century Schoolbook";
+    margin-left: auto;
+    margin-right: auto;
+}
+.th-name{
+    width: 7%;
+    text-align: center;
+
+}
+
+.th-last-run{
+    width: 5%;
+    text-align: center;
+}
+.custom-th .th-result{
+    width: 2%;
+    text-align: center;
+
+}
+.custom-th .th-params{
+    width: 4%;
+    text-align: center;
+
+}
+.custom-th .th-Date{
+    text-align: center;
+}
+.th-code{
+    width: 3%;
+    text-align: center;
+}
+.th-produit{
+    width: 3%;
+    text-align: center;
+}
+.images{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.step {
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.nextLink {
+    padding: 10px;
+    color: white;
+    background-color: lightskyblue;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.prevLink {
+    padding: 10px;
+    color: white;
+    background-color: lightskyblue;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.prevLink:hover{
+    background-color: #500472;
+    color: white;
+}
+.nextLink:hover{
+    background-color: #500472;
+    color: white;
+}
+
+.currentStep {
+    padding: 10px;
+    background-color: #500472;
+    color: white;
+    border: 1px solid lightskyblue;
+}
+
+.step.gap {
+    display: none;
+}
+
+.step:hover:not(.active) {
+    background-color: lightskyblue;
+}
+.pagination{
+    float: right;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+.result-between-2Date{
+    text-align: center;
+}
+
