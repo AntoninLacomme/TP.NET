@@ -63,38 +63,47 @@ namespace ASP.Server.Controllers
             // Le IsValid est True uniquement si tous les champs de CreateBookModel marqués Required sont remplis
             if (ModelState.IsValid)
             {
-                
-                // Il faut intéroger la base pour récupérer l'ensemble des objets genre qui correspond aux id dans CreateBookModel.Genres
-                List<Genre> genres = new List<Genre>();
-                foreach (var item in book.Genres)
-                {
-                    var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
-                    genres.Add(genre);
-
-                }
-                Console.WriteLine("test Genres");
-                //Console.WriteLine(book.Genres.ToList());
-
-                // Completer la création du livre avec toute les information nécéssaire que vous aurez ajoutez, et metter la liste des gener récupéré de la base aussi
-                Book b = new Book()
-                {
-                    Name = book.Name,
-                    Author = book.Author,
-                    Price = book.Price,
-                    Content = book.Content,
-                    Kinds = genres
-                };
-
                 try
                 {
-                   libraryDbContext.Add(b);
-                   libraryDbContext.SaveChanges();
-                    return RedirectToAction("List");
-                }
-                catch (Exception e)
+                    if (Convert.ToDouble(book.Price) > 0)
+                    {
+                        // Il faut intéroger la base pour récupérer l'ensemble des objets genre qui correspond aux id dans CreateBookModel.Genres
+                        List<Genre> genres = new List<Genre>();
+                        foreach (var item in book.Genres)
+                        {
+                            var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
+                            genres.Add(genre);
+
+                        }
+                        Console.WriteLine("test Genres");
+                        //Console.WriteLine(book.Genres.ToList());
+
+                        // Completer la création du livre avec toute les information nécéssaire que vous aurez ajoutez, et metter la liste des gener récupéré de la base aussi
+                        Book b = new Book()
+                        {
+                            Name = book.Name,
+                            Author = book.Author,
+                            Price = book.Price,
+                            Content = book.Content,
+                            Kinds = genres
+                        };
+
+                        try
+                        {
+                            libraryDbContext.Add(b);
+                            libraryDbContext.SaveChanges();
+                            return RedirectToAction("List");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e + "error man");
+                            throw;
+                        }
+                    }
+                    return NotFound("Le prix indiqué n'est pas valide");
+                } catch(Exception e)
                 {
-                    Console.WriteLine(e + "error man");
-                    throw;
+                    return NotFound("Le prix indiqué n'est pas valide");
                 }
             }
 
@@ -137,8 +146,6 @@ namespace ASP.Server.Controllers
         // methode permet de mettre a jour un book
         public ActionResult<Boolean> Update(int bookId, CreateBookModel book)
         {
-
-
             // fetch book with id
             var b = libraryDbContext.Books.Single(book => book.Id == bookId);
             // get new data
@@ -149,7 +156,6 @@ namespace ASP.Server.Controllers
                 {
                     var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
                     genres.Add(genre);
-
                 }
                 b.Name = book.Name;
                 b.Author = book.Author;
@@ -161,17 +167,8 @@ namespace ASP.Server.Controllers
                 libraryDbContext.SaveChanges();
 
                 return RedirectToAction("List");
-
-
             }
-            return View(new CreateBookModel() {Id= bookId, AllGenres = libraryDbContext.Genre.ToList() });
-
+            return View(new CreateBookModel() { Id = bookId, AllGenres = libraryDbContext.Genre.ToList() });
         }
-
-
-
-
-
-
     }
 }

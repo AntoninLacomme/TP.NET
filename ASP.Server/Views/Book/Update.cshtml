@@ -19,19 +19,19 @@ label {
 </style>
 
 <!-- Voici une facon de faire, mais ce n'est pas la seul, a vous de jouer ! -->
-<form asp-controller="Book" asp-action="Update">
+<form asp-controller="Book" asp-action="Update" class="formulaire" onsubmit="validation(event)">
     <div class="input-group">
         <label asp-for="Name"></label>
-        <input asp-for="Name" />
+        <input asp-for="Name" required/>
 
         <label asp-for="Author"></label>
-        <input asp-for="Author" />
+        <input asp-for="Author" required/>
 
         <label asp-for="Price"></label>
-        <input asp-for="Price" />
+        <input asp-for="Price" type="number" step="0.01" required/>
 
         <label asp-for="Content"></label>
-        <input asp-for="Content" />
+        <input asp-for="Content" required/>
 
     </div>
     <div class="input-group">
@@ -42,4 +42,35 @@ label {
     </div>
     <input type="hidden" name="bookId" value="@Model.Id" />
     <input type="submit" value="Update" style="width: 100%; margin-top: 50px" />
+    <div id="error-message" style="color:red;"></div>
 </form>
+
+<script>
+    function validation (event) {
+        event.preventDefault();
+        document.querySelector ("#error-message").innerHTML = "";
+        const form = document.querySelector(".formulaire");
+        if (form.Name.value.length < 3) {
+            showMessage ("Le nom du livre est trop court (3 charactères maximum).");
+            return false;
+        }
+        if (form.Author.value.length <3) {
+            showMessage ("Le nom de l'auteur est trop court (3 charactères minimum).");
+            return false;
+        }
+        if (form.Price.value < 0) {
+            showMessage ("Le prix est incorrect, il doit être supérieur à 0.");
+            return false;
+        }
+        if (form.Genres.value == "") {
+            showMessage ("Veuillez renseigner un genre.");
+            return false;
+        }
+        form.submit()
+        return true;
+    }
+
+    function showMessage (text) {
+        document.querySelector ("#error-message").innerHTML = text;
+    }
+</script>
