@@ -31,7 +31,8 @@ namespace WPF.Reader.Service
             });
         }
         public ObservableCollection<BookPublic> Books { get; set; } = new ObservableCollection<BookPublic>() {
-            new BookPublic(),
+
+            new BookPublic() {Name="Hello ?"},
             new BookPublic(),
             new BookPublic()
         };

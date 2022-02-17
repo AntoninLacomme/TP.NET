@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF.Reader.Pages"
       xmlns:vm="clr-namespace:WPF.Reader.ViewModel"
-      xmlns:model="clr-namespace:WPF.Reader.Model"
+      
       d:DataContext="{d:DesignInstance Type=vm:ListBook, d:IsDesignTimeCreatable=True}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListBooks">
     <StackPanel>
-        <Label Content="test" />
+     
         <!-- 
             A vous de créer la liste avec le bon binding. Une <ListBox> fera l'affaire 
             La propriété ItemsSource doit pointé vers la propiété Books de votre dataContext actuelle 
@@ -26,26 +26,25 @@
             CommandParameter="{Binding .}"
         -->
 
-        <ListView ItemsSource="{Binding ListBook}" Grid.Row="1"  Grid.Column="0" SelectionChanged="ListView_SelectionChanged">
+        
 
-            <ListView.View >
-
-                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="genre"  >
-
-                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Titre" Width="200"/>
-
-                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Auteur" Width="200"/>
-
-                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Genre" Width="200"/>
-
-                    <GridViewColumn DisplayMemberBinding="{Binding }" Header="Prix" Width="200"/>
-                </GridView>
-
-
-
-            </ListView.View>
+        <ListView Margin="10" Name="lvDataBinding"  ItemsSource="{Binding Books}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Margin="10,5,10,5" Text="Title: " />
+                        <TextBlock Margin="0,5,10,5"  Text="{Binding Name}" FontWeight="Bold" />
+                        <TextBlock Margin="10,5,10,5" Text="Auteur: " />
+                        <TextBlock Margin="0,5,10,5" Text="{Binding Author}" FontWeight="Bold" />
+                        <TextBlock Margin="10,5,10,5" Text="Prix " />
+                        <TextBlock Margin="0,5,10,5" Text="{Binding Price}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+             
+                       
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
- 
+
     </StackPanel>
 </Page>
 
