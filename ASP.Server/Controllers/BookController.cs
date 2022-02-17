@@ -65,42 +65,38 @@ namespace ASP.Server.Controllers
             {
                 try
                 {
-                    if (Convert.ToDouble(book.Price) > 0)
+                    // Il faut intéroger la base pour récupérer l'ensemble des objets genre qui correspond aux id dans CreateBookModel.Genres
+                    List<Genre> genres = new List<Genre>();
+                    foreach (var item in book.Genres)
                     {
-                        // Il faut intéroger la base pour récupérer l'ensemble des objets genre qui correspond aux id dans CreateBookModel.Genres
-                        List<Genre> genres = new List<Genre>();
-                        foreach (var item in book.Genres)
-                        {
-                            var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
-                            genres.Add(genre);
+                        var genre = libraryDbContext.Genre.Single(_genre => _genre.Id.Equals(item));
+                        genres.Add(genre);
 
-                        }
-                        Console.WriteLine("test Genres");
-                        //Console.WriteLine(book.Genres.ToList());
-
-                        // Completer la création du livre avec toute les information nécéssaire que vous aurez ajoutez, et metter la liste des gener récupéré de la base aussi
-                        Book b = new Book()
-                        {
-                            Name = book.Name,
-                            Author = book.Author,
-                            Price = book.Price,
-                            Content = book.Content,
-                            Kinds = genres
-                        };
-
-                        try
-                        {
-                            libraryDbContext.Add(b);
-                            libraryDbContext.SaveChanges();
-                            return RedirectToAction("List");
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e + "error man");
-                            throw;
-                        }
                     }
-                    return NotFound("Le prix indiqué n'est pas valide");
+                    Console.WriteLine("test Genres");
+                    //Console.WriteLine(book.Genres.ToList());
+
+                    // Completer la création du livre avec toute les information nécéssaire que vous aurez ajoutez, et metter la liste des gener récupéré de la base aussi
+                    Book b = new Book()
+                    {
+                        Name = book.Name,
+                        Author = book.Author,
+                        Price = book.Price,
+                        Content = book.Content,
+                        Kinds = genres
+                    };
+
+                    try
+                    {
+                        libraryDbContext.Add(b);
+                        libraryDbContext.SaveChanges();
+                        return RedirectToAction("List");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e + "error man");
+                        throw;
+                    }
                 } catch(Exception e)
                 {
                     return NotFound("Le prix indiqué n'est pas valide");

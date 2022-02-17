@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
+using WPF.Reader.ApiBook;
 using WPF.Reader.Model;
 
 namespace WPF.Reader.ViewModel
@@ -10,9 +11,9 @@ namespace WPF.Reader.ViewModel
         public ICommand ReadCommand { get; init; } = new RelayCommand(x => { /* A vous de définir la commande */ });
 
         // n'oublier pas faire de faire le binding dans DetailsBook.xaml !!!!
-        public Book CurrentBook { get; init; }
+        public BookPublic CurrentBook { get; init; }
 
-        public DetailsBook(Book book)
+        public DetailsBook(BookPublic book)
         {
             CurrentBook = book;
         }
@@ -21,6 +22,6 @@ namespace WPF.Reader.ViewModel
     /* Cette classe sert juste a afficher des donnée de test dans le designer */
     public class InDesignDetailsBook : DetailsBook
     {
-        public InDesignDetailsBook() : base(new Book() /*{ Title = "Test Book" }*/) { }
+        public InDesignDetailsBook() : base(new BookPublic() /*{ Title = "Test Book" }*/) { }
     }
 }
