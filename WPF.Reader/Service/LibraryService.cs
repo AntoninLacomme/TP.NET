@@ -24,7 +24,7 @@ namespace WPF.Reader.Service
         async public void getBooks()
         {
             var client = new ApiBook.Client(getHttpClient ());
-            var result = await client.ApiBookGetBooksAsync(null, 10, null);
+            var result = await client.ApiBookGetBooksAsync(null, null, null);
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -36,15 +36,10 @@ namespace WPF.Reader.Service
             });
         }
 
-        async public void getBookById (int id)
+        public Book getBookById(int id)
         {
             var client = new ApiBook.Client(getHttpClient());
-            Book result = await client.ApiBookGetBookAsync(id);
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                BookById = result;
-            });
+            return client.ApiBookGetBookAsync(id).Result;
         }
 
         async public void getGenres()

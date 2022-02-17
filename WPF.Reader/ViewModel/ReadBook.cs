@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using WPF.Reader.ApiBook;
 using WPF.Reader.Model;
 
 namespace WPF.Reader.ViewModel
@@ -7,14 +8,10 @@ namespace WPF.Reader.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // A vous de jouer maintenant
-    }
-
-    /* Cette classe sert juste a afficher des donnée de test dans le designer */
-    class InDesignReadBook : ReadBook
-    {
-        public InDesignReadBook() : base()
+        public Book CurrentBook { get; init; }
+        public ReadBook (Book book)
         {
+            CurrentBook = book;
         }
     }
 }

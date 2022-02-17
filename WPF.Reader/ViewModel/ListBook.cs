@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -24,8 +25,14 @@ namespace WPF.Reader.ViewModel
             instance = new ListBook();
         }
 
-        public ICommand DetailsBook { get; init; } = new RelayCommand(x => {
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<BookPublic>();
+        public ICommand DetailsBook { get; init; } = new RelayCommand(id => {
+            foreach (BookPublic book in Ioc.Default.GetService<LibraryService>().Books)
+            {
+                if (book.Id == (int) id)
+                {
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>(book);
+                }
+            }
         });
 
 

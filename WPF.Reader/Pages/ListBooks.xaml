@@ -37,7 +37,7 @@
                             <TextBlock Margin="0,5,10,5" Text="{Binding Author}" FontWeight="Bold" />
                             <TextBlock Margin="10,5,10,5" Text="Prix " />
                             <TextBlock Margin="0,5,10,5" Text="{Binding Price}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
-                    <Button Command="{Binding DetailsBook, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" Width="100" Content="Details" Height="40"/>
+                    <Button Command="{Binding DataContext.DetailsBook, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" CommandParameter="{Binding Id}" Width="100" Content="Details" Height="40"/>
                 </WrapPanel>
                     </DataTemplate>
 
