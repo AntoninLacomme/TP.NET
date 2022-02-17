@@ -16,7 +16,6 @@ namespace WPF.Reader.ViewModel
 
         public ICommand ItemSelectedCommand { get; set; }
 
-
         public ICommand GoBack { get; set; }
         public ICommand GoTo { get; set; }
 
@@ -26,7 +25,7 @@ namespace WPF.Reader.ViewModel
         }
 
         public ICommand DetailsBook { get; init; } = new RelayCommand(x => {
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>();
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<BookPublic>();
         });
 
 
@@ -35,14 +34,9 @@ namespace WPF.Reader.ViewModel
 
         public ListBook()
         {
-
             Ioc.Default.GetService<LibraryService>().getBooks();
             ItemSelectedCommand = new RelayCommand(book => { Ioc.Default.GetService<LibraryService>().getBooks(); });
-
         }
-
-        
-
     }   
    
 }

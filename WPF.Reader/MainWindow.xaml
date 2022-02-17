@@ -29,7 +29,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
             <Button Command="{Binding ViewBooks}" Grid.Column="0" Width="100" Content="List livre" Height="40"/>
-            <Button Command="{Binding }" Grid.Column="1" Width="100" Content="Genre" Height="40"/>
+            <Button Command="{Binding ViewGenres}" Grid.Column="1" Width="100" Content="Genre" Height="40"/>
            
         </Grid>
 

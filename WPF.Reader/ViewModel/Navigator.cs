@@ -19,8 +19,11 @@ namespace WPF.Reader.ViewModel
 
         public ICommand ViewBooks { get; init; } = new RelayCommand(x => {
             Ioc.Default.GetRequiredService<INavigationService>().Navigate<ListBook>(); });
-        
-       
+
+        public ICommand ViewGenres { get; init; } = new RelayCommand(x =>
+        {
+           Ioc.Default.GetRequiredService<INavigationService>().Navigate<ListGenre>();
+        });
 
         public ICommand GoToHome { get; init; } = new RelayCommand(x => {
             var service = Ioc.Default.GetRequiredService<INavigationService>();

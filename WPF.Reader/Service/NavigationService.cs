@@ -27,6 +27,7 @@ namespace WPF.Reader.Service
         private readonly Dictionary<Type, Type> viewMapping = new()
         {
             [typeof(ViewModel.ListBook)] = typeof(Pages.ListBooks),
+            [typeof(ViewModel.ListGenre)] = typeof(Pages.ListGenres),
             [typeof(ViewModel.ReadBook)] = typeof(Pages.ReadBook),
             [typeof(ViewModel.DetailsBook)] = typeof(Pages.DetailsBook)
         };

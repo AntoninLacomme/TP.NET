@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using WPF.Reader.ApiBook;
@@ -18,8 +19,12 @@ namespace WPF.Reader.ViewModel
         public DetailsBook(BookPublic book)
         {
             CurrentBook = book;
+            Ioc.Default.GetService<LibraryService>().getBookById(book.Id);
+            //ItemSelectedCommand = new RelayCommand(book => { Ioc.Default.GetService<LibraryService>().getBookById(book.Id) });
         }
-       
+
+      //  public IObservable<BookPublic> Book => Ioc.Default.GetRequiredService<LibraryService>().Book;
+
     }
 
     /* Cette classe sert juste a afficher des donnée de test dans le designer */
@@ -28,4 +33,6 @@ namespace WPF.Reader.ViewModel
         public InDesignDetailsBook() : base(new BookPublic() /*{ Title = "Test Book" }*/) { }
 
     }
+
+
 }
