@@ -20,6 +20,8 @@ namespace WPF.Reader.ViewModel
         public ICommand ViewBooks { get; init; } = new RelayCommand(x => {
             Ioc.Default.GetRequiredService<INavigationService>().Navigate<ListBook>(); });
         
+       
+
         public ICommand GoToHome { get; init; } = new RelayCommand(x => {
             var service = Ioc.Default.GetRequiredService<INavigationService>();
             if (service.Frame.CanGoBack)

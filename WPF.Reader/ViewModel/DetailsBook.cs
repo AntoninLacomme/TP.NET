@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using System.ComponentModel;
 using System.Windows.Input;
 using WPF.Reader.ApiBook;
 using WPF.Reader.Model;
+using WPF.Reader.Service;
 
 namespace WPF.Reader.ViewModel
 {
@@ -17,11 +19,13 @@ namespace WPF.Reader.ViewModel
         {
             CurrentBook = book;
         }
+       
     }
 
     /* Cette classe sert juste a afficher des donnée de test dans le designer */
     public class InDesignDetailsBook : DetailsBook
     {
         public InDesignDetailsBook() : base(new BookPublic() /*{ Title = "Test Book" }*/) { }
+
     }
 }

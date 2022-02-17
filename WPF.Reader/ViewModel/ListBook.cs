@@ -24,6 +24,12 @@ namespace WPF.Reader.ViewModel
         {
             instance = new ListBook();
         }
+
+        public ICommand DetailsBook { get; init; } = new RelayCommand(x => {
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>();
+        });
+
+
         // n'oublier pas faire de faire le binding dans ListBook.xaml !!!!
         public ObservableCollection<BookPublic> Books => Ioc.Default.GetRequiredService<LibraryService>().Books;
 
@@ -32,9 +38,11 @@ namespace WPF.Reader.ViewModel
 
             Ioc.Default.GetService<LibraryService>().getBooks();
             ItemSelectedCommand = new RelayCommand(book => { Ioc.Default.GetService<LibraryService>().getBooks(); });
-         
+
         }
 
-       
-    }
+        
+
+    }   
+   
 }
